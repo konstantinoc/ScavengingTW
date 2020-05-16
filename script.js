@@ -64,6 +64,19 @@ td.appendChild(btnSendAll);
 tr.appendChild(td);
 
 tbody.appendChild(tr);
+
+tr = document.createElement("tr");
+td = document.createElement("td");
+var btnSendAllAuto = document.createElement('a');
+btnSendAllAuto.setAttribute("id", "btn_start");
+btnSendAllAuto.setAttribute("class", "btn btn-default");
+//btnSendAllAuto.style.marginLeft = "30px";
+btnSendAllAuto.style.width = "90px";
+btnSendAllAuto.innerHTML = "Start auto";
+td.appendChild(btnSendAllAuto);
+tr.appendChild(td);
+
+tbody.appendChild(tr);
 table.appendChild(tbody);
 bor.appendChild(table);
 
@@ -79,6 +92,31 @@ btnSendAll.onclick = function(){
 btn.onclick= function(){
     current = parseInt(txtSpear.value,10);
     sendTroops();
+}
+
+var interval;
+
+btnSendAllAuto.onclick = function(){
+//REMEMBER TO CHANGE 3!!!!!!!!!!!
+
+    if (btnSendAllAuto.innerHTML == "Start auto"){
+        btnSendAllAuto.innerHTML = "Stop auto";
+        interval = setInterval(function(){
+             if(txtSpear.value == ""){
+                   btnSendAll.click();
+                }
+                else{
+                    btn.click();
+                }
+            if(document.getElementsByClassName("btn btn-default free_send_button").length == 3){
+
+            }
+        }, 1000);
+    }
+    else{
+        btnSendAllAuto.innerHTML = "Start auto";
+        clearInterval(interval);
+    }
 }
 
 function sendTroops(){
